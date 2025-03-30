@@ -1,4 +1,3 @@
-import os
 from pathlib import Path
 from typing import Any
 
@@ -37,8 +36,9 @@ def process_tile_images(
         tile_folders = [tile_folders]  # Convert single folder to list
 
     for folder in tile_folders:
-        for filename in os.listdir(folder):
-            img_path = os.path.join(folder, filename)
+        folder_path = Path(folder)
+        for filename in folder_path.iterdir():
+            img_path = folder_path / filename
             try:
                 img = Image.open(img_path).convert("RGB")
                 img = img.resize(tile_size)  # Resize tiles to uniform size
@@ -87,7 +87,8 @@ def create_mosaic(target_image_path, tile_folders, tile_size=(200, 200)) -> None
             selected_tile = tile_images[idx[0][0]]
             mosaic.paste(selected_tile, (x * tile_size[0], y * tile_size[1]))
 
-    name, ext = os.path.splitext(target_image_path)
+    target_image_path = Path(target_image_path)
+    name, ext = target_image_path.stem, target_image_path.suffix
     mosaic.save(Path(Path.cwd() / "output" / f"{name}_mosaic{ext}"))
 
 
