@@ -7,6 +7,7 @@ from PIL import Image
 from PIL.ImageFile import ImageFile
 from numpy import ndarray, dtype
 from sklearn.neighbors import KDTree
+from tqdm import tqdm
 
 app = typer.Typer()
 
@@ -22,7 +23,7 @@ def get_dominant_color(image: Image.Image) -> float | tuple[int, ...] | None:
 
 
 def process_tile_images(
-    tile_folders, tile_size
+        tile_folders, tile_size
 ) -> tuple[ndarray[tuple[int, ...], dtype[Any]], list[ImageFile]]:
     """Process the tile images of the folders.
 
@@ -80,7 +81,7 @@ def create_mosaic(target_image_path, tile_folders, tile_size=(200, 200)) -> None
 
     mosaic = Image.new("RGB", (grid_w * tile_size[0], grid_h * tile_size[1]))
 
-    for y in range(grid_h):
+    for y in tqdm(range(grid_h), desc="Generating Mosaic", unit="row"):
         for x in range(grid_w):
             avg_color = target_pixels[y, x]
             dist, idx = tree.query([avg_color], k=1)
@@ -94,13 +95,13 @@ def create_mosaic(target_image_path, tile_folders, tile_size=(200, 200)) -> None
 
 @app.command()
 def generate_mosaic(
-    target_image: str = typer.Option(..., help="Path to the target image."),
-    tile_folders: list[str] = typer.Option(
-        ..., help="List of folders containing tile images."
-    ),
-    tile_size: int = typer.Option(
-        200, help="Size of the tiles in pixels (default is 200)."
-    ),
+        target_image: str = typer.Option(..., help="Path to the target image."),
+        tile_folders: list[str] = typer.Option(
+            ..., help="List of folders containing tile images."
+        ),
+        tile_size: int = typer.Option(
+            200, help="Size of the tiles in pixels (default is 200)."
+        ),
 ):
     create_mosaic(target_image, tile_folders, tile_size=(tile_size, tile_size))
 
