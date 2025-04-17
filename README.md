@@ -3,15 +3,17 @@
 Create mosaics of images using a collection of smaller images.
 
 <!-- TOC -->
-* [Image Mosaic Generator](#image-mosaic-generator)
-  * [🚀 Features](#-features)
-  * [Prerequisites](#prerequisites)
-    * [1. Install Python 3 and uv](#1-install-python-3-and-uv)
-    * [2. Create a virtual environment with all necessary dependencies](#2-create-a-virtual-environment-with-all-necessary-dependencies)
-    * [3. Activate the virtual environment](#3-activate-the-virtual-environment)
-  * [Usage](#usage)
-  * [Linting (using ruff)](#linting-using-ruff)
-  * [Formatting (using ruff)](#formatting-using-ruff)
+
+- [Image Mosaic Generator](#image-mosaic-generator)
+  - [🚀 Features](#-features)
+  - [Prerequisites](#prerequisites)
+    - [1. Install Python 3 and uv](#1-install-python-3-and-uv)
+    - [2. Create a virtual environment with all necessary dependencies](#2-create-a-virtual-environment-with-all-necessary-dependencies)
+    - [3. Activate the virtual environment](#3-activate-the-virtual-environment)
+  - [Usage](#usage)
+  - [Linting (using ruff)](#linting-using-ruff)
+  - [Formatting (using ruff)](#formatting-using-ruff)
+
 <!-- TOC -->
 
 ## 🚀 Features
@@ -36,7 +38,7 @@ Create mosaics of images using a collection of smaller images.
 **MacOS (using `brew`)**
 
 ```bash
-brew install python3 uv
+brew install python@3.13 uv
 ```
 
 **Ubuntu/Debian**
@@ -62,9 +64,9 @@ source .venv/bin/activate
 
 ## Usage
 
-```bash                                                                                                                                                                    
- Usage: main.py [OPTIONS]                                                                                                                                                                                 
-                                                                                                                                                                                                          
+```bash
+ Usage: main.py [OPTIONS]
+
 ╭─ Options ──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
 │ *  --target-image              TEXT     Path to the target image. [default: None] [required]                                                                                                           │
 │ *  --tile-folders              TEXT     List of folders containing tile images. [default: None] [required]                                                                                             │
