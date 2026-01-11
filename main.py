@@ -23,7 +23,7 @@ def get_dominant_color(image: Image.Image) -> float | tuple[int, ...] | None:
 
 
 def process_tile_images(
-        tile_folders, tile_size
+    tile_folders, tile_size
 ) -> tuple[ndarray[tuple[int, ...], dtype[Any]], list[ImageFile]]:
     """Process the tile images of the folders.
 
@@ -95,13 +95,13 @@ def create_mosaic(target_image_path, tile_folders, tile_size=(200, 200)) -> None
 
 @app.command()
 def generate_mosaic(
-        target_image: str = typer.Option(..., help="Path to the target image."),
-        tile_folders: list[str] = typer.Option(
-            ..., help="List of folders containing tile images."
-        ),
-        tile_size: int = typer.Option(
-            200, help="Size of the tiles in pixels (default is 200)."
-        ),
+    target_image: str = typer.Option(..., help="Path to the target image."),
+    tile_folders: list[str] = typer.Option(
+        ..., help="List of folders containing tile images."
+    ),
+    tile_size: int = typer.Option(
+        200, help="Size of the tiles in pixels (default is 200)."
+    ),
 ):
     create_mosaic(target_image, tile_folders, tile_size=(tile_size, tile_size))
 

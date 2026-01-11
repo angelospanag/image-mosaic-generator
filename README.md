@@ -30,7 +30,7 @@ Create mosaics of images using a collection of smaller images.
 
 ## Prerequisites
 
-- [Python 3.13.\*](https://www.python.org/downloads/)
+- [Python 3.14.\*](https://www.python.org/)
 - [uv](https://docs.astral.sh/uv/)
 
 ### 1. Install Python 3 and uv
@@ -38,7 +38,7 @@ Create mosaics of images using a collection of smaller images.
 **MacOS (using `brew`)**
 
 ```bash
-brew install python@3.13 uv
+brew install python@3.14 uv
 ```
 
 **Ubuntu/Debian**
