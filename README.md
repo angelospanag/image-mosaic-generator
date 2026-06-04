@@ -2,89 +2,64 @@
 
 Create mosaics of images using a collection of smaller images.
 
-<!-- TOC -->
+## Features
 
-- [Image Mosaic Generator](#image-mosaic-generator)
-  - [🚀 Features](#-features)
-  - [Prerequisites](#prerequisites)
-    - [1. Install Python 3 and uv](#1-install-python-3-and-uv)
-    - [2. Create a virtual environment with all necessary dependencies](#2-create-a-virtual-environment-with-all-necessary-dependencies)
-    - [3. Activate the virtual environment](#3-activate-the-virtual-environment)
-  - [Usage](#usage)
-  - [Linting (using ruff)](#linting-using-ruff)
-  - [Formatting (using ruff)](#formatting-using-ruff)
+- Converts a target image into a mosaic using folders of other images as source
+- Uses dominant colors of tiles for better accuracy
+- Supports multiple tile image folders
+- Configurable tile size for high-resolution results
+- Simple CLI via [Typer](https://typer.tiangolo.com/)
 
-<!-- TOC -->
+## Getting Started
 
-## 🚀 Features
-
-✅ Converts a target image into a mosaic using folders of other images as source
-
-✅ Uses dominant colors of tiles for better accuracy
-
-✅ Supports multiple folders for tile images
-
-✅ Allows custom tile sizes for high-resolution results
-
-✅ Simple command-line interface (CLI) with [Typer](https://typer.tiangolo.com/)
-
-## Prerequisites
-
-- [Python 3.14.\*](https://www.python.org/)
-- [uv](https://docs.astral.sh/uv/)
-
-### 1. Install Python 3 and uv
-
-**MacOS (using `brew`)**
+[mise](https://mise.jdx.dev/) manages the pinned toolchain (Python 3.14, uv).
 
 ```bash
-brew install python@3.14 uv
+# macOS / Linux
+curl https://mise.run | sh
+
+# Windows
+winget install jdx.mise
 ```
 
-**Ubuntu/Debian**
+Activate mise in your shell (`~/.zshrc`):
 
-```bash
-sudo apt install python3 python3-venv
-curl -LsSf https://astral.sh/uv/install.sh | sh
+```zsh
+eval "$(mise activate zsh)"
 ```
 
-### 2. Create a virtual environment with all necessary dependencies
-
-From the root of the project execute:
+Then, in the repo:
 
 ```bash
-uv sync
-```
-
-### 3. Activate the virtual environment
-
-```bash
-source .venv/bin/activate
+mise trust         # one-time
+mise install       # downloads Python and uv
+mise run install   # installs dependencies into .venv
 ```
 
 ## Usage
 
 ```bash
- Usage: main.py [OPTIONS]
-
-╭─ Options ──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
-│ *  --target-image              TEXT     Path to the target image. [default: None] [required]                                                                                                           │
-│ *  --tile-folders              TEXT     List of folders containing tile images. [default: None] [required]                                                                                             │
-│    --tile-size                 INTEGER  Size of the tiles in pixels (default is 200). [default: 200]                                                                                                   │
-│    --install-completion                 Install completion for the current shell.                                                                                                                      │
-│    --show-completion                    Show completion for the current shell, to copy it or customize the installation.                                                                               │
-│    --help                               Show this message and exit.                                                                                                                                    │
-╰────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+uv run python main.py --target-image path/to/image.jpg --tile-folders path/to/tiles
 ```
 
-## Linting (using [ruff](https://docs.astral.sh/ruff/))
+Multiple tile folders:
 
 ```bash
-ruff check main.py
+uv run python main.py --target-image photo.jpg \
+  --tile-folders folder1 --tile-folders folder2 \
+  --tile-size 100
 ```
 
-## Formatting (using [ruff](https://docs.astral.sh/ruff/))
+The output image is saved to `output/` in the current directory.
 
-```bash
-ruff format main.py
-```
+## Development
+
+| Command              | Description                                 |
+|----------------------|---------------------------------------------|
+| `mise run install`   | Install dependencies into `.venv`           |
+| `mise run test`      | Run tests                                   |
+| `mise run fmt`       | Format code via `ruff format`               |
+| `mise run lint`      | Lint code via `ruff check`                  |
+| `mise run typecheck` | Type check via `ty check`                   |
+| `mise run vuln`      | Scan dependencies for known vulnerabilities |
+| `mise run deps`      | Update and sync dependencies                |

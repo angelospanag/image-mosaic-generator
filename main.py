@@ -3,9 +3,8 @@ from typing import Any
 
 import numpy as np
 import typer
+from numpy import dtype, ndarray
 from PIL import Image
-from PIL.ImageFile import ImageFile
-from numpy import ndarray, dtype
 from sklearn.neighbors import KDTree
 from tqdm import tqdm
 
@@ -24,7 +23,7 @@ def get_dominant_color(image: Image.Image) -> float | tuple[int, ...] | None:
 
 def process_tile_images(
     tile_folders, tile_size
-) -> tuple[ndarray[tuple[int, ...], dtype[Any]], list[ImageFile]]:
+) -> tuple[ndarray[tuple[int, ...], dtype[Any]], list[Image.Image]]:
     """Process the tile images of the folders.
 
     :param tile_folders: The image folders to be used as input to create the mosaic
@@ -95,11 +94,11 @@ def create_mosaic(target_image_path, tile_folders, tile_size=(200, 200)) -> None
 
 @app.command()
 def generate_mosaic(
-    target_image: str = typer.Option(..., help="Path to the target image."),
-    tile_folders: list[str] = typer.Option(
+    target_image: str = typer.Option(..., help="Path to the target image."),  # noqa: B008
+    tile_folders: list[str] = typer.Option(  # noqa: B008
         ..., help="List of folders containing tile images."
     ),
-    tile_size: int = typer.Option(
+    tile_size: int = typer.Option(  # noqa: B008
         200, help="Size of the tiles in pixels (default is 200)."
     ),
 ):

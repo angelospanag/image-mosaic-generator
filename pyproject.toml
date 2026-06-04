@@ -17,4 +17,19 @@ dependencies = [
 ]
 
 [dependency-groups]
-dev = ["ruff>=0.14.11"]
+dev = ["pytest>=9.0.3", "ruff>=0.15.16", "ty>=0.0.43"]
+
+[tool.ruff]
+lint.select = [
+    "E",
+    "W",
+    "F",
+    "B",
+    "I",
+    "N",
+    "SIM",
+    "UP",
+    "PERF",
+    "RET",
+    "RSE",
+]
