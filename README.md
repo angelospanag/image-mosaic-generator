@@ -12,7 +12,7 @@ Create mosaics of images using a collection of smaller images.
 
 ## Getting Started
 
-[mise](https://mise.jdx.dev/) manages the pinned toolchain (Python 3.14, uv).
+[mise](https://mise.jdx.dev/) manages the pinned toolchain (Python 3.15, uv).
 
 ```bash
 # macOS / Linux
